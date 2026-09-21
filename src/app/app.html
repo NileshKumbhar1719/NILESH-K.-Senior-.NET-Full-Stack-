@@ -1,336 +1,1037 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<style>
-  :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
+<body class="selection:bg-cyan-500 selection:text-black">
 
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3"></div>
 
-    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
-      180deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+    <!-- Top Navbar -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-slate-800/80 px-4 lg:px-12 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-blue-500 to-cyan-400 p-[2px] transition-transform duration-300 group-hover:scale-105">
+                    <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 code-font text-xl">
+                        .NET
+                    </div>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg tracking-wider text-white">NILESH<span class="text-cyan-400">.DEV</span></span>
+                    <span class="block text-[10px] text-slate-400 code-font tracking-widest -mt-1">ASP.NET CORE ARCHITECT</span>
+                </div>
+            </a>
 
-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-      90deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#home" class="hover:text-cyan-400 transition-colors py-1">Home</a>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors py-1">Skills</a>
+                <a href="#architecture" class="hover:text-cyan-400 transition-colors py-1">Clean Arch</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors py-1">Projects</a>
+                <a href="#blog" class="hover:text-cyan-400 transition-colors py-1">Blog</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors py-1">Contact</a>
+            </nav>
 
-    --pill-accent: var(--bright-blue);
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleAdminView()" id="admin-toggle-btn" class="relative group px-4 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs font-semibold text-purple-300 border border-purple-500/30 transition-all flex items-center gap-2 overflow-hidden shadow-lg shadow-purple-950/40">
+                    <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <span id="admin-btn-text">Admin Portal </span>
+                </button>
 
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs font-semibold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 transition-all">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Resume</span>
+                </a>
 
-  h1 {
-    font-size: 3.125rem;
-    color: var(--gray-900);
-    font-weight: 500;
-    line-height: 100%;
-    letter-spacing: -0.125rem;
-    margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-  }
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
 
-  p {
-    margin: 0;
-    color: var(--gray-700);
-  }
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 mt-3 pt-3 pb-2 flex flex-col gap-3 text-sm">
+            <a href="#home" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-cyan-400 px-2 py-1">Home</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-cyan-400 px-2 py-1">Skills</a>
+            <a href="#architecture" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-cyan-400 px-2 py-1">Clean Architecture</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-cyan-400 px-2 py-1">Projects</a>
+            <a href="#blog" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-cyan-400 px-2 py-1">Blog</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-cyan-400 px-2 py-1">Contact</a>
+        </div>
+    </header>
 
-  main {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: inherit;
-    position: relative;
-  }
+    <!-- Main Content Container -->
+    <main id="public-view" class="pt-24 pb-16">
+        
+        <!-- HERO SECTION -->
+        <section id="home" class="relative min-h-[90vh] flex items-center justify-center px-4 lg:px-12 py-12 overflow-hidden">
+            <!-- Background Ambient Glow -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-  .angular-logo {
-    max-width: 9.2rem;
-  }
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
+                
+                <!-- Left Text Column -->
+                <div class="lg:col-span-7 flex flex-col items-start gap-6 text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-cyan-500/30 text-cyan-400 text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                        <span>Available for Enterprise Architecture & Lead .NET Roles</span>
+                    </div>
 
-  .content {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 700px;
-    margin-bottom: 3rem;
-  }
+                    <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        Building Scalable <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500">
+                            Enterprise .NET Systems
+                        </span>
+                    </h1>
 
-  .content h1 {
-    margin-top: 1.75rem;
-  }
+                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
+                        Full-Stack .NET Developer specializing in <span class="text-slate-200 font-semibold">ASP.NET Core Web API</span>, <span class="text-slate-200 font-semibold">Microservices Architecture</span>, Entity Framework Core, SQL Server, and modern frontend engines (<span class="text-slate-200 font-semibold">React & Angular</span>).
+                    </p>
 
-  .content p {
-    margin-top: 1.5rem;
-  }
+                    <!-- Dynamic Animated Tech Banner -->
+                    <div class="w-full glass-panel p-3 rounded-xl border border-slate-800 flex items-center gap-3 code-font text-xs sm:text-sm text-purple-300">
+                        <span class="text-cyan-400">&gt;</span>
+                        <span id="typing-text" class="text-slate-300"></span>
+                        <span class="w-2 h-4 bg-cyan-400 animate-pulse inline-block"></span>
+                    </div>
 
-  .divider {
-    width: 1px;
-    background: var(--red-to-pink-to-purple-vertical-gradient);
-    margin-inline: 0.5rem;
-  }
+                    <!-- Call To Action Buttons -->
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/50 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                            <span>Explore Projects</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
 
-  .pill-group {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-  }
+                        <button onclick="toggleAdminView()" class="px-6 py-3.5 rounded-xl glass-card hover:bg-purple-950/40 text-purple-300 font-semibold text-sm border border-purple-500/30 hover:border-purple-400/60 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-cyan-400"></i>
+                            <span>Personal Portal Demo</span>
+                        </button>
+                    </div>
 
-  .pill {
-    display: flex;
-    align-items: center;
-    --pill-accent: var(--bright-blue);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
-    color: var(--pill-accent);
-    padding-inline: 0.75rem;
-    padding-block: 0.375rem;
-    border-radius: 2.75rem;
-    border: 0;
-    transition: background 0.3s ease;
-    font-family: var(--inter-font);
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.4rem;
-    letter-spacing: -0.00875rem;
-    text-decoration: none;
-  }
+                    <!-- Tech Stack Pills -->
+                    <div class="pt-6 border-t border-slate-800/80 w-full flex flex-wrap items-center gap-4 text-slate-400 text-xs">
+                        <span class="font-semibold text-slate-500 uppercase tracking-wider">Core Stack:</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 flex items-center gap-1.5"><i class="fa-brands fa-microsoft text-cyan-400"></i> C# / .NET 8</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-server text-purple-400"></i> ASP.NET Core</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 flex items-center gap-1.5"><i class="fa-database fa-solid text-blue-400"></i> SQL Server</span>
+                         <span class="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 flex items-center gap-1.5">
+        <i class="fa-brands fa-angular text-red-500"></i> Angular / RxJS
+    </span>
 
-  .pill:hover {
-    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
-  }
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 flex items-center gap-1.5"><i class="fa-brands fa-react text-cyan-400"></i> React / TS</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 flex items-center gap-1.5"><i class="fa-brands fa-docker text-blue-500"></i> Docker & Azure</span>
+                    </div>
+                </div>
 
-  .pill-group .pill:nth-child(6n + 1) {
-    --pill-accent: var(--bright-blue);
-  }
-  .pill-group .pill:nth-child(6n + 2) {
-    --pill-accent: var(--french-violet);
-  }
-  .pill-group .pill:nth-child(6n + 3),
-  .pill-group .pill:nth-child(6n + 4),
-  .pill-group .pill:nth-child(6n + 5) {
-    --pill-accent: var(--hot-red);
-  }
+                <!-- Right Visual Profile Badge Column -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    
+                    <!-- Floating Badge Card -->
+                    <div class="relative w-full max-w-md glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-2xl shadow-purple-950/50">
+                        
+                        <!-- Glowing avatar frame -->
+                        <div class="relative mx-auto w-36 h-36 mb-6 rounded-2xl bg-gradient-to-tr from-cyan-500 via-purple-600 to-pink-500 p-[3px] shadow-lg shadow-purple-500/30">
+                            <img src="image.nilesh.jpeg" alt="Developer Avatar" class="w-full h-full object-cover rounded-[13px]">
+                            <div class="absolute -bottom-2 -right-2 bg-slate-900 border border-cyan-400 text-cyan-400 text-[10px] font-mono px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+                                ACTIVE
+                            </div>
+                        </div>
 
-  .pill-group svg {
-    margin-inline-start: 0.25rem;
-  }
+                        <!-- Developer Badge Info -->
+                        <div class="text-center space-y-2">
+                            <h2 class="text-xl font-bold text-white">Nilesh Kumbhar.</h2>
+                            <p class="text-xs text-purple-300 code-font">Senior .NET / C# Developer</p>
+                            <p class="text-xs text-slate-400">2+ Years Enterprise Experience in FinTech & SaaS</p>
+                        </div>
 
-  .social-links {
-    display: flex;
-    align-items: center;
-    gap: 0.73rem;
-    margin-top: 1.5rem;
-  }
+                        <!-- Mini Specs Grid -->
+                        <div class="grid grid-cols-3 gap-2 mt-6 pt-6 border-t border-slate-800 text-center">
+                            <div class="p-2 rounded-lg bg-slate-900/60 border border-slate-800">
+                                <div class="text-cyan-400 font-extrabold text-base">25+</div>
+                                <div class="text-[10px] text-slate-400">Projects</div>
+                            </div>
+                            <div class="p-2 rounded-lg bg-slate-900/60 border border-slate-800">
+                                <div class="text-purple-400 font-extrabold text-base">99.9%</div>
+                                <div class="text-[10px] text-slate-400">API Uptime</div>
+                            </div>
+                            <div class="p-2 rounded-lg bg-slate-900/60 border border-slate-800">
+                                <div class="text-pink-400 font-extrabold text-base">100%</div>
+                                <div class="text-[10px] text-slate-400">Clean Code</div>
+                            </div>
+                        </div>
 
-  .social-links path {
-    transition: fill 0.3s ease;
-    fill: var(--gray-400);
-  }
+                        <!-- Floating Tech Tags Around Box -->
+                        <div class="absolute -top-4 -left-4 glass-card px-3 py-1.5 rounded-xl border border-cyan-500/40 text-cyan-300 text-xs font-mono flex items-center gap-2 animate-float">
+                            <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+                            <span>JWT & OAuth2</span>
+                        </div>
 
-  .social-links a:hover svg path {
-    fill: var(--gray-900);
-  }
+                        <div class="absolute -bottom-4 -right-4 glass-card px-3 py-1.5 rounded-xl border border-purple-500/40 text-purple-300 text-xs font-mono flex items-center gap-2 animate-float" style="animation-delay: 1.5s;">
+                            <i class="fa-solid fa-diagram-project text-purple-400"></i>
+                            <span>CQRS & MediatR</span>
+                        </div>
+                    </div>
+                </div>
 
-  @media screen and (max-width: 650px) {
-    .content {
-      flex-direction: column;
-      width: max-content;
-    }
+            </div>
+        </section>
 
-    .divider {
-      height: 1px;
-      width: 100%;
-      background: var(--red-to-pink-to-purple-horizontal-gradient);
-      margin-block: 1.5rem;
-    }
-  }
-</style>
+        <!-- SKILLS MATRIX SECTION -->
+        <section id="skills" class="py-20 px-4 lg:px-12 relative border-t border-slate-800/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <!-- Section Header -->
+                <div class="text-center space-y-3">
+                    <div class="text-cyan-400 code-font text-xs font-semibold tracking-wider uppercase">// TECHNICAL COMPETENCIES</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Full-Stack .NET Skill Matrix</h2>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Categorized overview of backend, frontend, database, and DevOps capabilities with proficiency indicators.</p>
+                </div>
 
-<main class="main">
-  <div class="content">
-    <div class="left-side">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 982 239"
-        fill="none"
-        class="angular-logo"
-      >
-        <g clip-path="url(#a)">
-          <path
-            fill="url(#b)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-          <path
-            fill="url(#c)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-        </g>
-        <defs>
-          <radialGradient
-            id="c"
-            cx="0"
-            cy="0"
-            r="1"
-            gradientTransform="rotate(118.122 171.182 60.81) scale(205.794)"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#FF41F8" />
-            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
-            <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
-          </radialGradient>
-          <linearGradient
-            id="b"
-            x1="0"
-            x2="982"
-            y1="192"
-            y2="192"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#F0060B" />
-            <stop offset="0" stop-color="#F0070C" />
-            <stop offset=".526" stop-color="#CC26D5" />
-            <stop offset="1" stop-color="#7702FF" />
-          </linearGradient>
-          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
-        </defs>
-      </svg>
-      <h1>Hello, {{ title }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
+                <!-- Skills Category Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Backend (.NET Core) Card -->
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 relative hover:border-purple-500/40 transition-all">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Backend (.NET)</h3>
+                                <p class="text-xs text-slate-400">Core API & Microservices</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">C# / .NET 8 / ASP.NET Core</span>
+                                    <span class="text-purple-400">95%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-600 to-cyan-400 rounded-full" style="width: 95%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">EF Core / LINQ / Dapper</span>
+                                    <span class="text-purple-400">90%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-600 to-cyan-400 rounded-full" style="width: 90%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">REST APIs / SignalR / WebSockets</span>
+                                    <span class="text-purple-400">92%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-600 to-cyan-400 rounded-full" style="width: 92%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">Clean Architecture / CQRS</span>
+                                    <span class="text-purple-400">88%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-purple-600 to-cyan-400 rounded-full" style="width: 88%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frontend Card -->
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 relative hover:border-cyan-500/40 transition-all">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl">
+                                <i class="fa-solid fa-desktop"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Frontend Web</h3>
+                                <p class="text-xs text-slate-400">Modern Reactive Interfaces</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                     <span class="text-slate-300">Angular / RxJS</span>
+                                    <span class="text-cyan-400">82%</span>
+                                    
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full" style="width: 88%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                   <span class="text-slate-300">React.js / TypeScript</span>
+                                    <span class="text-cyan-400">88%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full" style="width: 82%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">Tailwind CSS / Bootstrap 5</span>
+                                    <span class="text-cyan-400">92%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full" style="width: 92%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">HTML5 / JavaScript / DOM</span>
+                                    <span class="text-cyan-400">95%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full" style="width: 95%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database & DevOps Card -->
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 relative hover:border-blue-500/40 transition-all">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Database & Cloud</h3>
+                                <p class="text-xs text-slate-400">Persistence & Deployment</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">MS SQL Server / T-SQL / Stored Procs</span>
+                                    <span class="text-blue-400">92%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 92%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">Azure App Services / Azure SQL</span>
+                                    <span class="text-blue-400">85%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 85%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">Docker Containers & Kubernetes</span>
+                                    <span class="text-blue-400">80%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 80%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-medium mb-1">
+                                    <span class="text-slate-300">CI/CD Pipelines (GitHub Actions / Azure DevOps)</span>
+                                    <span class="text-blue-400">87%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 87%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CLEAN ARCHITECTURE VISUALIZER SECTION -->
+        <section id="architecture" class="py-20 px-4 lg:px-12 relative border-t border-slate-800/60 bg-slate-950/40">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-3">
+                    <div class="text-purple-400 code-font text-xs font-semibold tracking-wider uppercase">// DESIGN PATTERNS & ARCHITECTURE</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Interactive ASP.NET Core Clean Architecture</h2>
+                    <p class="text-slate-400 text-sm max-w-2xl mx-auto">Click on any layer below to inspect its responsibility, dependencies, and code structure pattern within standard enterprise solutions.</p>
+                </div>
+
+                <!-- Interactive Architecture Diagram Container -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Diagram Visualizer Box -->
+                    <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 relative space-y-4">
+                        <div class="text-xs font-mono text-slate-400 mb-2 flex items-center justify-between">
+                            <span>ONION / CLEAN ARCHITECTURE CONCENTRIC LAYERS</span>
+                            <span class="text-cyan-400">Click a layer below <i class="fa-solid fa-hand-pointer ml-1"></i></span>
+                        </div>
+
+                        <!-- Outer Layer: Presentation & UI -->
+                        <div onclick="selectArchLayer('presentation')" id="layer-presentation" class="arch-layer cursor-pointer p-4 rounded-2xl bg-purple-950/30 border border-purple-500/40 hover:border-purple-400 transition-all text-center space-y-2">
+                            <div class="flex items-center justify-between text-xs text-purple-300 font-bold uppercase code-font">
+                                <span>1. Presentation Layer (API / React / Angular)</span>
+                                <span class="text-[10px] bg-purple-900/60 px-2 py-0.5 rounded">Outer Layer</span>
+                            </div>
+
+                            <!-- Middle Outer: Infrastructure -->
+                            <div onclick="event.stopPropagation(); selectArchLayer('infrastructure')" id="layer-infrastructure" class="arch-layer cursor-pointer p-4 rounded-xl bg-blue-950/40 border border-blue-500/40 hover:border-blue-400 transition-all space-y-2">
+                                <div class="flex items-center justify-between text-xs text-blue-300 font-bold uppercase code-font">
+                                    <span>2. Infrastructure Layer (EF Core / DB Context / Identity)</span>
+                                    <span class="text-[10px] bg-blue-900/60 px-2 py-0.5 rounded">External Concerns</span>
+                                </div>
+
+                                <!-- Middle Inner: Application -->
+                                <div onclick="event.stopPropagation(); selectArchLayer('application')" id="layer-application" class="arch-layer cursor-pointer p-4 rounded-lg bg-cyan-950/50 border border-cyan-500/40 hover:border-cyan-400 transition-all space-y-2">
+                                    <div class="flex items-center justify-between text-xs text-cyan-300 font-bold uppercase code-font">
+                                        <span>3. Application Layer (CQRS / DTOs / Services)</span>
+                                        <span class="text-[10px] bg-cyan-900/60 px-2 py-0.5 rounded">Business Logic</span>
+                                    </div>
+
+                                    <!-- Core Inner: Domain -->
+                                    <div onclick="event.stopPropagation(); selectArchLayer('domain')" id="layer-domain" class="arch-layer cursor-pointer p-4 rounded-md bg-emerald-950/60 border border-emerald-500/50 hover:border-emerald-400 transition-all text-center">
+                                        <div class="flex items-center justify-between text-xs text-emerald-300 font-bold uppercase code-font">
+                                            <span>4. Core Domain Layer (Entities / Enums / Interfaces)</span>
+                                            <span class="text-[10px] bg-emerald-900/60 px-2 py-0.5 rounded">Zero Dependencies</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer Detail Inspector Box -->
+                    <div class="lg:col-span-5 glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
+                        <div class="flex items-center gap-2 text-cyan-400 text-xs font-mono">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>LAYER INSPECTOR</span>
+                        </div>
+
+                        <h3 id="arch-title" class="text-xl font-bold text-white">Select a Layer</h3>
+                        <p id="arch-desc" class="text-slate-300 text-sm leading-relaxed">
+                            Click any of the architectural layers in the diagram to view its role, internal components, and dependency isolation in .NET enterprise development.
+                        </p>
+
+                        <div id="arch-details" class="space-y-3 pt-3 border-t border-slate-800 hidden">
+                            <div>
+                                <span class="text-xs font-semibold text-slate-400 block uppercase">Key Components:</span>
+                                <div id="arch-components" class="flex flex-wrap gap-2 mt-1"></div>
+                            </div>
+
+                            <div>
+                                <span class="text-xs font-semibold text-slate-400 block uppercase">Dependencies:</span>
+                                <p id="arch-dependencies" class="text-xs text-purple-300 font-mono mt-0.5"></p>
+                            </div>
+
+                            <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 code-font text-xs text-slate-300 overflow-x-auto">
+                                <span class="text-slate-500 block text-[10px]">// Sample Namespace Structure</span>
+                                <span id="arch-code" class="text-cyan-400"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SHOWCASE SECTION -->
+        <section id="projects" class="py-20 px-4 lg:px-12 relative border-t border-slate-800/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-3">
+                        <div class="text-cyan-400 code-font text-xs font-semibold tracking-wider uppercase">// FEATURED WORK & PORTFOLIO</div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Enterprise & Personal Projects</h2>
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap items-center gap-2 bg-slate-900/80 p-1.5 rounded-xl border border-slate-800">
+                        <button onclick="filterProjects('all')" class="project-filter-btn active px-4 py-1.5 rounded-lg text-xs font-semibold text-white bg-purple-600 transition-all">All</button>
+                        <button onclick="filterProjects('dotnet')" class="project-filter-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">ASP.NET Core</button>
+                        <button onclick="filterProjects('fullstack')" class="project-filter-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Full Stack</button>
+                        <button onclick="filterProjects('cloud')" class="project-filter-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Cloud / Azure</button>
+                    </div>
+                </div>
+
+                <!-- Highlight Flagship Project Banner -->
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-purple-500/40 relative overflow-hidden shadow-2xl shadow-purple-950/30">
+                    <div class="absolute top-0 right-0 bg-gradient-to-l from-purple-600 to-pink-600 text-white text-[10px] font-extrabold px-4 py-1 rounded-bl-xl tracking-wider uppercase shadow-md">
+                        Flagship Project
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/40 text-purple-300 text-xs font-mono">
+                                <i class="fa-solid fa-crown text-amber-400"></i>
+                                <span>Personal Developer Management Portal</span>
+                            </div>
+
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Full-Stack .NET Developer Portal & Personal Ecosystem</h3>
+
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                A clean, production-grade Web API and responsive management application built to manage portfolio content, project metrics, technical blogs, user authentication, and dynamic analytics. Built with Clean Architecture principles.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 text-xs font-mono text-cyan-300 pt-1">
+                                <span class="bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800">ASP.NET Core 8 Web API</span>
+                                <span class="bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800">Entity Framework Core</span>
+                                <span class="bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800">JWT Authentication</span>
+                                <span class="bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800">Angular / Tailwind</span>
+                                <span class="bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800">SQL Server</span>
+                            </div>
+
+                            <div class="flex items-center gap-4 pt-4">
+                                <button onclick="toggleAdminView()" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs shadow-lg shadow-purple-600/30 transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-play"></i>
+                                    <span>Launch Live Portal Demo</span>
+                                </button>
+                                
+                                <button onclick="openModal('portal-spec-modal')" class="px-5 py-2.5 rounded-xl glass-card hover:bg-slate-800 text-slate-300 font-semibold text-xs border border-slate-700 transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-sitemap text-cyan-400"></i>
+                                    <span>Architecture Blueprint</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5">
+                            <div class="rounded-2xl overflow-hidden border border-slate-700/60 shadow-xl group relative">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Developer Portal Preview" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs code-font text-purple-300">
+                                    <span>Status: Production Ready</span>
+                                    <span class="text-emerald-400">100% CI/CD Passed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Project Item 1 -->
+                    <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-cyan-500/40 transition-all" data-category="dotnet fullstack">
+                        <div>
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="E-Commerce API" class="w-full h-full object-cover">
+                                <div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-mono text-cyan-400 border border-cyan-500/30">
+                                    ASP.NET Core API
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-lg font-bold text-white">Microservice FinTech Engine</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">
+                                    Distributed payment transaction processing microservices with Redis caching, RabbitMQ event bus, and SQL Server partition tables.
+                                </p>
+                                <div class="flex flex-wrap gap-1.5 pt-2 text-[10px] font-mono text-slate-300">
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">.NET 8 API</span>
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">RabbitMQ</span>
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Redis</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0 flex items-center justify-between text-xs font-semibold border-t border-slate-800/60 mt-4">
+                            <a href="#" class="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"><i class="fa-brands fa-github"></i> Source Code</a>
+                            <a href="#" class="text-purple-400 hover:text-purple-300 flex items-center gap-1"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Project Item 2 -->
+                    <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-purple-500/40 transition-all" data-category="cloud dotnet">
+                        <div>
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=600&q=80" alt="Azure Cloud Portal" class="w-full h-full object-cover">
+                                <div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-mono text-purple-400 border border-purple-500/30">
+                                    Azure Cloud
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-lg font-bold text-white">Enterprise Health Telemetry Platform</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">
+                                    Cloud-native IoT patient device metrics aggregation system built on Azure App Services, Azure Blob Storage, and EF Core.
+                                </p>
+                                <div class="flex flex-wrap gap-1.5 pt-2 text-[10px] font-mono text-slate-300">
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Azure SQL</span>
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Docker</span>
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">SignalR</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0 flex items-center justify-between text-xs font-semibold border-t border-slate-800/60 mt-4">
+                            <a href="#" class="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"><i class="fa-brands fa-github"></i> Source Code</a>
+                            <a href="#" class="text-purple-400 hover:text-purple-300 flex items-center gap-1"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Project Item 3 -->
+                    <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between hover:border-blue-500/40 transition-all" data-category="fullstack">
+                        <div>
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="React SaaS Dashboard" class="w-full h-full object-cover">
+                                <div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-mono text-blue-400 border border-blue-500/30">
+                                    Angular + .NET
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h4 class="text-lg font-bold text-white">SaaS Task Management Hub</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">
+                                    Real-time collaborative kanban task management platform with role-based JWT security and automated email notifications.
+                                </p>
+                                <div class="flex flex-wrap gap-1.5 pt-2 text-[10px] font-mono text-slate-300">
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Angular</span>
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">ASP.NET Core</span>
+                                    <span class="bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Tailwind</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0 flex items-center justify-between text-xs font-semibold border-t border-slate-800/60 mt-4">
+                            <a href="#" class="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"><i class="fa-brands fa-github"></i> Source Code</a>
+                            <a href="#" class="text-purple-400 hover:text-purple-300 flex items-center gap-1"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ARTICLES / BLOG SECTION -->
+        <section id="blog" class="py-20 px-4 lg:px-12 relative border-t border-slate-800/60 bg-slate-950/40">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-3">
+                    <div class="text-cyan-400 code-font text-xs font-semibold tracking-wider uppercase">// TECHNICAL WRITING & ARTICLES</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Latest .NET Architecture Blogs</h2>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">In-depth technical guides, tutorials, and performance benchmarks for C# and ASP.NET Core.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Article 1 -->
+                    <article class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-xs font-mono text-purple-400">
+                                <span>.NET 8 & Architecture</span>
+                                <span>5 min read</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white hover:text-cyan-400 transition-colors cursor-pointer">
+                                Mastering Clean Architecture with CQRS & MediatR in ASP.NET Core
+                            </h3>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                A step-by-step walkthrough for organizing enterprise solution layers, enforcing isolation, and implementing query/command handlers cleanly.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                            <span>Published: Oct 2025</span>
+                            <span class="text-cyan-400 font-semibold cursor-pointer hover:underline">Read Article &rarr;</span>
+                        </div>
+                    </article>
+
+                    <!-- Article 2 -->
+                    <article class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-xs font-mono text-cyan-400">
+                                <span>Security & Auth</span>
+                                <span>7 min read</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white hover:text-cyan-400 transition-colors cursor-pointer">
+                                Implementing Production-Grade JWT Refresh Tokens in Web API
+                            </h3>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                Security best practices for token expiry, database token revocation, HTTP-Only cookies, and role-based policies.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                            <span>Published: Dec 2025</span>
+                            <span class="text-cyan-400 font-semibold cursor-pointer hover:underline">Read Article &rarr;</span>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 hover:border-blue-500/40 transition-all flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-xs font-mono text-blue-400">
+                                <span>Database & SQL</span>
+                                <span>8 min read</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white hover:text-cyan-400 transition-colors cursor-pointer">
+                                Optimizing Entity Framework Core Queries for High Throughput
+                            </h3>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                Avoiding N+1 queries, leveraging AsNoTracking, compiling queries, and tuning SQL Server execution plans.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                            <span>Published: Feb 2026</span>
+                            <span class="text-cyan-400 font-semibold cursor-pointer hover:underline">Read Article &rarr;</span>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 px-4 lg:px-12 relative border-t border-slate-800/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-3">
+                    <div class="text-purple-400 code-font text-xs font-semibold tracking-wider uppercase">// GET IN TOUCH</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let's Discuss Your Next .NET Project</h2>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Have a software engineering opportunity or consultation request? Send a direct message below.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Contact Info Card -->
+                    <div class="lg:col-span-5 glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                        <h3 class="text-xl font-bold text-white">Contact Information</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Direct Email</div>
+                                    <div class="text-sm font-semibold text-white">kumbharnilesh17@gmail.com</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Location</div>
+                                    <div class="text-sm font-semibold text-white">Pune / Mumbai, India (Remote Available)</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">LinkedIn Profile</div>
+                                    <div class="text-sm font-semibold text-white">linkedin.com/in/nilesh</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-slate-800 space-y-3">
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Connect On Socials</span>
+                            <div class="flex items-center gap-3">
+                                <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition-all"><i class="fa-brands fa-github text-lg"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-400 transition-all"><i class="fa-brands fa-twitter text-lg"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-blue-400 hover:border-blue-400 transition-all"><i class="fa-brands fa-stack-overflow text-lg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Your Name *</label>
+                                    <input type="text" id="sender-name" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400 transition-all" placeholder="e.g. John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Email Address *</label>
+                                    <input type="email" id="sender-email" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400 transition-all" placeholder="e.g. john@company.com">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Subject</label>
+                                <input type="text" id="sender-subject" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400 transition-all" placeholder="e.g. Senior .NET Role Consultation">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Message *</label>
+                                <textarea id="sender-message" rows="4" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400 transition-all resize-none" placeholder="Describe your project, team requirements, or questions..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 text-white font-semibold text-xs shadow-xl shadow-purple-600/25 hover:shadow-purple-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Send Message to Portal</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- LIVE ADMIN DASHBOARD PREVIEW VIEW (Toggled via Admin Button) -->
+    <div id="admin-view" class="hidden pt-20 pb-16 px-4 lg:px-12 min-h-screen bg-slate-950">
+        <div class="max-w-7xl mx-auto space-y-8">
+            
+            <!-- Admin Top Bar -->
+            <div class="glass-panel p-4 rounded-2xl border border-purple-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
+                        <i class="fa-solid fa-user-shield text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            Personal Developer Portal Admin
+                            <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[10px] px-2 py-0.5 rounded-full font-mono">Authenticated</span>
+                        </h2>
+                        <p class="text-xs text-slate-400">Managing ASP.NET Core Backend State & Live Database Records</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="openModal('add-project-modal')" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-md transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Project</span>
+                    </button>
+
+                    <button onclick="toggleAdminView()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-all">
+                        Exit Admin View
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Analytics Overview -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Total Projects</div>
+                        <div id="stat-projects-count" class="text-2xl font-extrabold text-white mt-1">4</div>
+                        <div class="text-[10px] text-emerald-400 mt-1"><i class="fa-solid fa-arrow-up"></i> +1 this month</div>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Published Blogs</div>
+                        <div class="text-2xl font-extrabold text-white mt-1">12</div>
+                        <div class="text-[10px] text-purple-400 mt-1"><i class="fa-solid fa-book-open"></i> 3 drafts pending</div>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Inquiries / Messages</div>
+                        <div id="stat-messages-count" class="text-2xl font-extrabold text-white mt-1">18</div>
+                        <div class="text-[10px] text-cyan-400 mt-1"><i class="fa-solid fa-clock"></i> 2 unread</div>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl">
+                        <i class="fa-solid fa-inbox"></i>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Monthly Visitors</div>
+                        <div class="text-2xl font-extrabold text-white mt-1">2,840</div>
+                        <div class="text-[10px] text-emerald-400 mt-1"><i class="fa-solid fa-arrow-up"></i> +14.2% growth</div>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Analytics Chart & Messages Panel -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Traffic Analytics Canvas Chart -->
+                <div class="lg:col-span-7 glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-bold text-white">Web API Requests & Visitor Traffic</h3>
+                        <span class="text-xs text-slate-400 code-font">Last 7 Days</span>
+                    </div>
+                    <div class="h-64 w-full">
+                        <canvas id="admin-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Contact Inquiries Data Box -->
+                <div class="lg:col-span-5 glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-bold text-white">Contact Messages</h3>
+                        <span class="text-xs text-cyan-400 code-font">Live DB Queue</span>
+                    </div>
+
+                    <div id="admin-messages-list" class="space-y-3 max-h-64 overflow-y-auto pr-1">
+                        <!-- Dynamic Messages Render Here -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Projects Management Table -->
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white">Manage Developer Projects</h3>
+                        <p class="text-xs text-slate-400">Perform CRUD actions directly on the portfolio database</p>
+                    </div>
+                    
+                    <button onclick="openModal('add-project-modal')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-cyan-400 font-semibold border border-slate-700">
+                        + New Project Entity
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-900/80 text-slate-400 uppercase font-mono text-[10px] border-b border-slate-800">
+                            <tr>
+                                <th class="p-3">Project Title</th>
+                                <th class="p-3">Category</th>
+                                <th class="p-3">Tech Stack</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-projects-table-body" class="divide-y divide-slate-800/60">
+                            <!-- Dynamic Table Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="divider" role="separator" aria-label="Divider"></div>
-    <div class="right-side">
-      <div class="pill-group">
-        @for (item of [
-          { title: 'Explore the Docs', link: 'https://angular.dev' },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
-        ]; track item.title) {
-          <a
-            class="pill"
-            [href]="item.link"
-            target="_blank"
-            rel="noopener"
-          >
-            <span>{{ item.title }}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="14"
-              viewBox="0 -960 960 960"
-              width="14"
-              fill="currentColor"
-            >
-              <path
-                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
-              />
-            </svg>
-          </a>
-        }
-      </div>
-      <div class="social-links">
-        <a
-          href="https://github.com/angular/angular"
-          aria-label="Github"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="25"
-            height="24"
-            viewBox="0 0 25 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Github"
-          >
-            <path
-              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://twitter.com/angular"
-          aria-label="Twitter"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Twitter"
-          >
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"
-          aria-label="Youtube"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="29"
-            height="20"
-            viewBox="0 0 29 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Youtube"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"
-            />
-          </svg>
-        </a>
-      </div>
+
+    <!-- SPECIFICATION MODAL -->
+    <div id="portal-spec-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="glass-panel max-w-2xl w-full rounded-3xl p-6 border border-purple-500/40 space-y-4 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('portal-spec-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400">
+                    <i class="fa-solid fa-sitemap"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Developer Portal Architecture Specs</h3>
+                    <span class="text-xs text-cyan-400 code-font">ASP.NET Core Clean Architecture Blueprint</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-300">
+                <p>
+                    This Personal Developer Management Portal is engineered using Clean Architecture principles to keep business logic isolated from infrastructure frameworks.
+                </p>
+
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 code-font">
+                    <div class="text-purple-400 font-bold">// Solution Directory Layout</div>
+                    <div class="text-slate-400">
+                        MyDeveloperPortal.sln<br>
+                        ├── 📁 Core / Domain (Entities, Enums, Exceptions)<br>
+                        ├── 📁 Core / Application (CQRS Handlers, DTOs, AutoMapper)<br>
+                        ├── 📁 Infrastructure / Data (EF Core DbContext, Repositories)<br>
+                        ├── 📁 Infrastructure / Identity (JWT, User Manager)<br>
+                        └── 📁 Presentation / WebAPI (Controllers, Middlewares)
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                        <span class="text-cyan-400 font-bold block mb-1">Key Features:</span>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400">
+                            <li>JWT Auth & Refresh Tokens</li>
+                            <li>EF Core Migration Support</li>
+                            <li>MediatR Pipeline Behaviors</li>
+                            <li>FluentValidation Guards</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                        <span class="text-purple-400 font-bold block mb-1">Database Schema:</span>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400">
+                            <li>Projects & TechBadges</li>
+                            <li>BlogPosts & Categories</li>
+                            <li>ContactMessages</li>
+                            <li>SystemActivityLogs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('portal-spec-modal')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold">
+                    Close Blueprint
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-</main>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+    <!-- ADD PROJECT MODAL -->
+    <div id="add-project-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="glass-panel max-w-lg w-full rounded-3xl p-6 border border-cyan-500/40 space-y-4 relative">
+            <button onclick="closeModal('add-project-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
+            <h3 class="text-lg font-bold text-white">Add New Project to DB</h3>
 
-<router-outlet />
+            <form onsubmit="handleAddProject(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Project Name</label>
+                    <input type="text" id="new-project-title" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Category</label>
+                    <select id="new-project-category" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                        <option value="dotnet">ASP.NET Core</option>
+                        <option value="fullstack">Full Stack</option>
+                        <option value="cloud">Cloud / Azure</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Technologies Used (comma separated)</label>
+                    <input type="text" id="new-project-tech" placeholder="e.g. C#, EF Core, React" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Description</label>
+                    <textarea id="new-project-desc" rows="3" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400 resize-none"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeModal('add-project-modal')" class="px-4 py-2 rounded-xl bg-slate-800 text-xs text-slate-300">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold">Save Entity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    
+<!-- </body>
+</html> -->

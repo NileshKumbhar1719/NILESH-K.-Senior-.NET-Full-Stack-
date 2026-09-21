@@ -1,13 +1,463 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>NileshDev</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NILESH K. | Senior .NET Full-Stack Architect</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dotnet: {
+                            light: '#a855f7',
+                            DEFAULT: '#7c3aed',
+                            dark: '#5b21b6',
+                        },
+                        neon: {
+                            blue: '#38bdf8',
+                            purple: '#c084fc',
+                            cyan: '#22d3ee',
+                        },
+                        darkbg: '#090d16',
+                        cardbg: '#111827',
+                    },
+                    animation: {
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(56, 189, 248, 0.2)' },
+                            '100%': { boxShadow: '0 0 30px rgba(192, 132, 252, 0.5)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome & Lucide Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chart.js for Admin Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #090d16;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(56, 189, 248, 0.2);
+        }
+        .neon-border-blue {
+            box-shadow: 0 0 15px -3px rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .neon-border-purple {
+            box-shadow: 0 0 15px -3px rgba(192, 132, 252, 0.3);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+        .neon-text-blue {
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+        .neon-text-purple {
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+    </style>
 </head>
 <body>
   <app-root></app-root>
+
+  <script>
+        // Dynamic In-Memory Data State
+        let projectsData = [
+            {
+                id: 1,
+                title: "Personal Developer Management Portal",
+                category: "fullstack",
+                tech: ["ASP.NET Core 8", "EF Core", "JWT", "React", "SQL Server"],
+                status: "Active",
+                desc: "Full-Stack developer portfolio and management portal with Clean Architecture."
+            },
+            {
+                id: 2,
+                title: "Microservice FinTech Engine",
+                category: "dotnet",
+                tech: [".NET 8 API", "RabbitMQ", "Redis"],
+                status: "Production",
+                desc: "Distributed transaction microservice with message queues."
+            },
+            {
+                id: 3,
+                title: "Enterprise Health Telemetry Platform",
+                category: "cloud",
+                tech: ["Azure SQL", "Docker", "SignalR"],
+                status: "Production",
+                desc: "Cloud-native patient metrics streaming portal."
+            },
+            {
+                id: 4,
+                title: "SaaS Task Management Hub",
+                category: "fullstack",
+                tech: ["React.js", "ASP.NET Core", "Tailwind"],
+                status: "Staging",
+                desc: "Real-time collaborative task board."
+            }
+        ];
+
+        let contactMessages = [
+            { id: 1, name: "Rahul Sharma", email: "rahul@techcorp.com", subject: "Senior .NET Lead Role", time: "10 mins ago" },
+            { id: 2, name: "Anita Desai", email: "anita@fintech.io", subject: "ASP.NET Core Consulting", time: "2 hours ago" }
+        ];
+
+        // Typing Effect Phrases for Hero Banner
+        const typingPhrases = [
+            "Architecting ASP.NET Core Web APIs...",
+            "Designing Clean Architecture & CQRS Systems...",
+            "Building High-Throughput SQL Server Queries...",
+            "Deploying Microservices on Azure & Docker..."
+        ];
+
+        let typingIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = typingPhrases[typingIndex];
+            const targetElement = document.getElementById('typing-text');
+
+            if (isDeleting) {
+                targetElement.innerText = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                targetElement.innerText = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                typingIndex = (typingIndex + 1) % typingPhrases.length;
+                setTimeout(typeEffect, 500);
+            } else {
+                setTimeout(typeEffect, isDeleting ? 40 : 80);
+            }
+        }
+
+        // Layer Details for Clean Architecture Inspector
+        const archLayerInfo = {
+            presentation: {
+                title: "1. Presentation Layer (API & UI)",
+                desc: "Handles HTTP requests, API controllers, Request/Response DTO mapping, and frontend client rendering.",
+                components: ["ASP.NET Core Controllers", "Swagger/OpenAPI", "Swagger UI", "Middlewares", "Cors Policies"],
+                dependencies: "Depends on Application Layer",
+                code: "namespace MyPortal.API.Controllers\n{\n    [ApiController]\n    public class ProjectsController : ControllerBase\n    {\n        private readonly IMediator _mediator;\n    }\n}"
+            },
+            infrastructure: {
+                title: "2. Infrastructure Layer (EF Core & External Data)",
+                desc: "Implements repository interfaces defined in Application layer. Deals with DB Context, SQL queries, Identity, and Azure services.",
+                components: ["ApplicationDbContext", "EF Core Configurations", "JWT Token Generator", "SMTP Mailer", "Blob Storage"],
+                dependencies: "Depends on Application & Domain Layers",
+                code: "namespace MyPortal.Infrastructure.Data\n{\n    public class ProjectRepository : IProjectRepository\n    {\n        private readonly ApplicationDbContext _db;\n    }\n}"
+            },
+            application: {
+                title: "3. Application Layer (CQRS & Business Logic)",
+                desc: "Contains use cases, business workflow rules, CQRS commands/queries, AutoMapper profiles, and validation pipelines.",
+                components: ["MediatR Handlers", "DTOs", "FluentValidation Guards", "Interfaces", "Service Behaviors"],
+                dependencies: "Depends on Domain Layer ONLY",
+                code: "namespace MyPortal.Application.Projects.Queries\n{\n    public record GetProjectsQuery() : IRequest<List<ProjectDto>>;\n}"
+            },
+            domain: {
+                title: "4. Domain Layer (Entities & Enterprise Rules)",
+                desc: "The core heart of the system. Contains domain models, value objects, domain events, and custom domain exceptions.",
+                components: ["Entities (Project, Blog)", "Enums", "Value Objects", "Domain Events", "Custom Exceptions"],
+                dependencies: "ZERO External Dependencies (Pure C#)",
+                code: "namespace MyPortal.Domain.Entities\n{\n    public class Project : BaseEntity\n    {\n        public string Title { get; set; }\n    }\n}"
+            }
+        };
+
+        function selectArchLayer(layerKey) {
+            const data = archLayerInfo[layerKey];
+            if (!data) return;
+
+            document.getElementById('arch-title').innerText = data.title;
+            document.getElementById('arch-desc').innerText = data.desc;
+            document.getElementById('arch-dependencies').innerText = data.dependencies;
+            document.getElementById('arch-code').innerText = data.code;
+
+            const compContainer = document.getElementById('arch-components');
+            compContainer.innerHTML = '';
+            data.components.forEach(c => {
+                const badge = document.createElement('span');
+                badge.className = 'px-2 py-1 rounded bg-slate-800 text-[10px] font-mono text-cyan-300 border border-slate-700';
+                badge.innerText = c;
+                compContainer.appendChild(badge);
+            });
+
+            document.getElementById('arch-details').classList.remove('hidden');
+
+            // Highlight border
+            document.querySelectorAll('.arch-layer').forEach(el => el.classList.remove('ring-2', 'ring-cyan-400'));
+            const activeEl = document.getElementById(`layer-${layerKey}`);
+            if (activeEl) activeEl.classList.add('ring-2', 'ring-cyan-400');
+        }
+
+        function filterProjects(category) {
+            // Update filter buttons
+            document.querySelectorAll('.project-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white', 'active');
+                btn.classList.add('text-slate-400');
+            });
+            event.target.classList.add('bg-purple-600', 'text-white', 'active');
+
+            // Filter project cards
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat.includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        let isAdminActive = false;
+        let chartInstance = null;
+
+        function toggleAdminView() {
+            isAdminActive = !isAdminActive;
+            const publicView = document.getElementById('public-view');
+            const adminView = document.getElementById('admin-view');
+            const btnText = document.getElementById('admin-btn-text');
+
+            if (isAdminActive) {
+                publicView.classList.add('hidden');
+                adminView.classList.remove('hidden');
+                btnText.innerText = 'Exit Admin';
+                renderAdminData();
+                initChart();
+                showToast('Switched to Personal Admin Portal Preview');
+            } else {
+                publicView.classList.remove('hidden');
+                adminView.classList.add('hidden');
+                btnText.innerText = 'Admin Portal Demo';
+                showToast('Returned to Public Developer Portfolio');
+            }
+        }
+
+        function renderAdminData() {
+            // Render Table
+            const tbody = document.getElementById('admin-projects-table-body');
+            tbody.innerHTML = '';
+
+            projectsData.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-900/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 font-semibold text-white">${p.title}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono text-[10px] border border-purple-800">${p.category}</span></td>
+                    <td class="p-3 font-mono text-[10px] text-slate-400">${p.tech.join(', ')}</td>
+                    <td class="p-3"><span class="text-emerald-400 font-semibold text-[10px]">${p.status}</span></td>
+                    <td class="p-3 text-right">
+                        <button onclick="deleteProject(${p.id})" class="text-pink-400 hover:text-pink-300 p-1"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Render Messages
+            const msgList = document.getElementById('admin-messages-list');
+            msgList.innerHTML = '';
+            contactMessages.forEach(m => {
+                const div = document.createElement('div');
+                div.className = "p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1";
+                div.innerHTML = `
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-bold text-white">${m.name}</span>
+                        <span class="text-[10px] text-slate-500 font-mono">${m.time}</span>
+                    </div>
+                    <div class="text-[11px] text-cyan-400">${m.subject}</div>
+                    <div class="text-[10px] text-slate-400">${m.email}</div>
+                `;
+                msgList.appendChild(div);
+            });
+
+            // Update Counts
+            document.getElementById('stat-projects-count').innerText = projectsData.length;
+            document.getElementById('stat-messages-count').innerText = contactMessages.length;
+        }
+
+        function deleteProject(id) {
+            projectsData = projectsData.filter(p => p.id !== id);
+            renderAdminData();
+            showToast('Project Entity Removed from DB');
+        }
+
+        function handleAddProject(e) {
+            e.preventDefault();
+            const title = document.getElementById('new-project-title').value;
+            const category = document.getElementById('new-project-category').value;
+            const tech = document.getElementById('new-project-tech').value.split(',');
+            const desc = document.getElementById('new-project-desc').value;
+
+            const newProj = {
+                id: Date.now(),
+                title,
+                category,
+                tech,
+                status: "Active",
+                desc
+            };
+
+            projectsData.push(newProj);
+            renderAdminData();
+            closeModal('add-project-modal');
+            e.target.reset();
+            showToast('New Project Added Successfully');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('sender-name').value;
+            const email = document.getElementById('sender-email').value;
+            const subject = document.getElementById('sender-subject').value || "Portfolio Contact";
+
+            contactMessages.unshift({
+                id: Date.now(),
+                name,
+                email,
+                subject,
+                time: "Just now"
+            });
+
+            e.target.reset();
+            showToast('Message sent to .NET Web API Backend!');
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('admin-chart');
+            if (!ctx) return;
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'API Requests (ms)',
+                        data: [1200, 1900, 1500, 2200, 2800, 2400, 3100],
+                        borderColor: '#38bdf8',
+                        backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Unique Visitors',
+                        data: [400, 550, 480, 700, 850, 780, 920],
+                        borderColor: '#c084fc',
+                        backgroundColor: 'rgba(192, 132, 252, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#94a3b8', font: { family: 'Fira Code', size: 10 } } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } },
+                        y: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } }
+                    }
+                }
+            });
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('flex');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('flex');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'glass-panel px-4 py-3 rounded-xl border border-cyan-500/50 text-cyan-300 text-xs font-semibold flex items-center gap-2 shadow-xl animate-bounce';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-cyan-400"></i> ${message}`;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            typeEffect();
+            selectArchLayer('presentation');
+        };
+    </script>
 </body>
 </html>
